@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 // import HomeView from '../views/HomeView.vue'
-import ChatView from '../pages/chat.vue'
+// import ChatView from '../pages/chat.vue'
 
 const routes = [
   // {
@@ -18,8 +18,8 @@ const routes = [
   // },
   {
     path: '/user/id/chat',
-    name: 'chat',
-    component: ChatView
+    name: 'chat-comp',
+    component: () => import('../pages/chat-comp.vue')
   },
   {
     path: '/message-list',
