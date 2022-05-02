@@ -1,8 +1,8 @@
 <template>
   <div class="user-list">
-    <ul>
+    <ul style="list-style-type: none;">
       <li v-for="(user,index) in users" :key="index">
-        {{ index+1 }} : {{ user.name.first }}
+        <div>{{ index+1 }} : {{ user.name.first }}</div>
       </li>
     </ul>
     <button @click="getUser">クリック</button>
