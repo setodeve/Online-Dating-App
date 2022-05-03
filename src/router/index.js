@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 // import HomeView from '../views/HomeView.vue'
 // import ChatView from '../pages/chat.vue'
+// import users from '../store/users.js'
 
 const routes = [
   // {
@@ -42,5 +43,12 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+
+// router.afterEach((to, from) => {
+//   users.commit("setUsers");
+//   to()
+//   from()
+// });
 
 export default router
