@@ -1,48 +1,9 @@
+import axios from 'axios'
 
-// export const users = {
-//   namespaced: true,
-//   state: {
-//     users: [],
-//     dummy: 1
-//   },
-//   getters: {
-//     getUserById (state,id) {
-//       return state.users[id]
-//     }
-//   },
-//   mutations: {
-//     setUsers: function(state,payload) {
-//       state.users = payload
-//     }
-//   },
-//   action: {
-    
-//     fetchUsers: function(context) {
-//       let info = [] ;
-//       // for(let i=0; i<10 ; i++){
-//       //   const res = fetch('https://randomuser.me/api')
-//       //   const results = res.json()
-//       console.log("test");
-//       for(let i=0; i<10 ; i++){
-//         const promise = fetch('https://randomuser.me/api');
-//         promise
-//           .then(response => response.json())
-//           .then(jsondata => {
-//             const id = jsondata["results"][0]["login"]["uuid"];
-//             info[i]["id"] = id ;
-//             info[i]["value"] = jsondata["results"][0] ;
-//           });
-//       }
-//       // }
-//       context.commit("setUsers",info) ;
-//     }
-//   }
-// }
 const namespaced = true
 
 const state = {
-  users: [],
-  dummy:1
+  users: []
 }
 
 const mutations = {
@@ -52,18 +13,23 @@ const mutations = {
 }
 
 const actions = {
-  fetchUsers: function(context) {
+  fetchUsers: async function(context) {
+    if( state.users.length != 0 ) return ;
     let info = [] ;
-    console.log("test");
-    for(let i=0; i<10 ; i++){
-      const promise = fetch('https://randomuser.me/api');
-      promise
-        .then(response => response.json())
+    await axios.get('https://randomuser.me/api/?results=100')
         .then(jsondata => {
-          info[i] = {id:jsondata["results"][0]["login"]["uuid"],value:jsondata["results"][0]} ;
+          let len =jsondata.data["results"].length ;
+          for(let i=0 ; i<len ; i++){
+            info.push({id:jsondata.data["results"][i]["login"]["uuid"],value:jsondata.data["results"][i]}) ;
+          }
+          context.commit("setUsers",info) ;
         });
-    }
-    context.commit("setUsers",info) ;
+  }
+}
+
+const getters ={
+  getUserById: function(id){
+    return state.users.filter(user => id === user.id) ;
   }
 }
 
@@ -72,4 +38,5 @@ export default {
   state,
   mutations,
   actions,
+  getters
 }
