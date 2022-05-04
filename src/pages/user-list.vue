@@ -12,13 +12,10 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
   name: 'UserListView',
-  components: {
-    // HelloWorld
+  mounted () {
+    this.$store.dispatch("users/fetchUsers");
   },
   data() {
     return {
@@ -28,11 +25,6 @@ export default {
   computed:{
     users:function(){
       return this.$store.state.users.users ;
-    },
-  },
-  methods: {
-    setUsers: function() {
-      this.$store.dispatch("users/fetchUsers");
     },
   },
 }
