@@ -1,13 +1,10 @@
 <template>
-  <div class="user-list">
-    <ul style="list-style-type: none;">
-      <li v-for="(user) in users" :key="user.id">
-        <router-link :to="{ path: '/user/id', query: { id: user.id }}">{{ user.value.name.first }}</router-link>
+  <div class="user-list container">
+    <ul class="d-flex flex-wrap" style="list-style-type: none;">
+      <li v-for="(user) in users" :key="user.id" class="col-3">
+        <router-link :to="{ path: '/user/', query: { id: user.id }}">{{ user.value.name.first }}</router-link>
       </li>
     </ul>
-    <button @click="setUsers">クリック</button>
-    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   </div>
 </template>
 

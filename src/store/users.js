@@ -16,7 +16,7 @@ const actions = {
   fetchUsers: async function(context) {
     if( state.users.length != 0 ) return ;
     let info = [] ;
-    await axios.get('https://randomuser.me/api/?results=100')
+    await axios.get('https://randomuser.me/api/?results=32')
         .then(jsondata => {
           let len =jsondata.data["results"].length ;
           for(let i=0 ; i<len ; i++){
@@ -24,10 +24,10 @@ const actions = {
           }
           context.commit("setUsers",info) ;
         });
-  }
+  },
 }
 
-const getters ={
+const getters = {
   getUserById: function(id){
     return state.users.filter(user => id === user.id) ;
   }
