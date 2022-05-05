@@ -1,7 +1,7 @@
 <template>
   <div class="user-detail">
     <h1>This is an about page</h1>
-    <!-- <div>Hi {{ user["first"] }} </div> -->
+    <div>Hi {{ user["first"] }} </div>
   </div>
 </template>
 
@@ -15,8 +15,9 @@ export default {
     }
   },
   mounted(){
-    // let tmp = this.$store.getters['users/getUserById'](this.$route.query.id) ;
-    // this.user = tmp[0].value.name ;
+    let tmp = this.$store.getters['users/getUserById'](this.$route.query.id) ;
+    this.user = tmp[0].value.name ;
+    console.log(this.user) ;
   },
 }
 </script>
