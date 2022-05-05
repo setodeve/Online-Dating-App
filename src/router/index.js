@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/user/id/chat',
+    path: `/user/:id/chat`,
     name: 'chat-comp',
     component: () => import('../pages/chat-comp.vue')
   },
@@ -12,7 +12,7 @@ const routes = [
     component: () => import('../pages/message-list.vue')
   },
   {
-    path: '/user/',
+    path: '/user',
     name: 'user-detail',
     component: () => import('../pages/user-detail.vue')
   },
