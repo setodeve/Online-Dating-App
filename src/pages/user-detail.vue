@@ -1,7 +1,7 @@
 <template>
   <div class="user-detail">
     <h1>This is an about page</h1>
-    {{ this.$store.getters['users/getUserById'](this.$route.query.id) }}
+    <div>Hi {{ user["first"] }} </div>
   </div>
 </template>
 
@@ -9,14 +9,15 @@
 <script>
 export default {
   name: 'UserDetailView',
-  mounted(){
-    // console.log(this.$store.getters['users/getUserById'](this.$route.query.id)) ;
-    // console.log(this) ;
-  },
   data() {
     return {
-
+      user : {}
     }
+  },
+  mounted(){
+    let tmp = this.$store.getters['users/getUserById'](this.$route.query.id) ;
+    this.user = tmp[0].value.name ;
+    console.log(this.user) ;
   },
 }
 </script>
