@@ -14,7 +14,12 @@ const mutations = {
 
 const actions = {
   fetchUsers: async function(context) {
-    if( state.users.length != 0 ) return ;
+    //second call
+    if( localStorage.getItem('key') !=null ){
+      context.commit("setUsers",JSON.parse(localStorage.getItem('key'))) ;
+      return ;
+    }
+    //first call
     let info = [] ;
     await axios.get('https://randomuser.me/api/?results=32')
         .then(jsondata => {
@@ -23,6 +28,7 @@ const actions = {
             info.push({id:jsondata.data["results"][i]["login"]["uuid"],value:jsondata.data["results"][i]}) ;
           }
           context.commit("setUsers",info) ;
+          localStorage.setItem('key', JSON.stringify(info));
         });
   },
 }

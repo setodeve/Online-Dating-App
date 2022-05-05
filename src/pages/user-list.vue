@@ -20,7 +20,7 @@ export default {
     }
   },
   computed:{
-    users:function(){
+    users: function(){
       return this.$store.state.users.users ;
     },
   },
