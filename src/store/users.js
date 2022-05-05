@@ -28,9 +28,6 @@ const actions = {
 }
 
 const getters = {
-  // getUserById: function(id){
-  //   return state.users.filter(user => id === user.id) ;
-  // }
   getUserById: (state) => (id) =>{
     return state.users.filter(user => id === user.id) ;
   }

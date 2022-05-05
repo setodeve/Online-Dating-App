@@ -17,7 +17,6 @@ export default {
   mounted(){
     let tmp = this.$store.getters['users/getUserById'](this.$route.query.id) ;
     this.user = tmp[0].value.name ;
-    console.log(this.user) ;
   },
 }
 </script>
