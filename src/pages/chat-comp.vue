@@ -28,7 +28,12 @@ export default {
     }
   },
   mounted(){
+    let messages = JSON.parse(localStorage.getItem("messages"))
+    if(messages == null) this.$store.dispatch("messages/arrangeMessages",{id: this.$route.params.id, message: messages});
+    else this.$store.dispatch("messages/arrangeMessages",{id: this.$route.params.id, message: messages[this.$route.params.id]});
+
     let tmp = this.$store.getters['messages/getMessagesById'](this.$route.params.id) ;
+
     if(tmp==undefined) this.message = [] ;
     else this.message = tmp ;
   },

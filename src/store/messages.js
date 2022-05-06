@@ -5,10 +5,8 @@ const state = {
   messages: {},
   /*
     [*************:{
-     value:{
       ["id","text"],
       ["id","text"],
-     }
     }]
   */
  templates:[
@@ -21,8 +19,9 @@ const state = {
 
 const mutations = {
   setMessages: function(state, {id ,message}){
+    if(state.messages==null) return undefined;
     state.messages[id] = message ;
-    localStorage.setItem(id, JSON.stringify(message));
+    localStorage.setItem("messages", JSON.stringify(state.messages));
   }
 }
 
@@ -34,7 +33,9 @@ const actions = {
 
 const getters = {
   getMessagesById: (state) => (id) =>{
-    state.messages[id] = JSON.parse(localStorage.getItem(id));
+    if(state.messages==null){
+      return undefined;
+    } 
     return state.messages[id] ;
   }
 }
