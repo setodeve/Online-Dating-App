@@ -20,22 +20,22 @@ const state = {
 }
 
 const mutations = {
-  setMessages: function(state, payload){
-    state.messages.push(payload) ;
+  setMessages: function(state, {id ,message}){
+    state.messages[id] = message ;
+    localStorage.setItem(id, JSON.stringify(message));
   }
 }
 
 const actions = {
-  arrangeMessages: function(context){
-    let info = [] ;
-    // info.push({id:jsondata.data["results"][i]["login"]["uuid"],value:jsondata.data["results"][i]}) ;
-    context.commit("setMessages",info) ;
+  arrangeMessages: function({commit}, {id,message}){
+    commit("setMessages",{id: id , message: message}) ;
   }
 }
 
 const getters = {
   getMessagesById: (state) => (id) =>{
-    return state.messages.filter(message => id === message.id) ;
+    state.messages[id] = JSON.parse(localStorage.getItem(id));
+    return state.messages[id] ;
   }
 }
 
