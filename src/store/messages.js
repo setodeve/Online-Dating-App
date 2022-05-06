@@ -2,14 +2,21 @@
 const namespaced = true
 
 const state = {
-  messages: []
+  messages: {},
   /*
-    [id: *************{
+    [*************:{
      value:{
-
+      ["id","text"],
+      ["id","text"],
      }
     }]
   */
+ templates:[
+   "こんにちは",
+   "いいですね",
+   "ありがとうございます",
+   "さようなら"
+ ]
 }
 
 const mutations = {
@@ -27,8 +34,8 @@ const actions = {
 }
 
 const getters = {
-  getMessagesById: function(id){
-    return state.users.filter(message => id === message.id) ;
+  getMessagesById: (state) => (id) =>{
+    return state.messages.filter(message => id === message.id) ;
   }
 }
 
