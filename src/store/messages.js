@@ -4,10 +4,10 @@ const namespaced = true
 const state = {
   messages: {},
   /*
-    [*************:{
+    {id:[
       ["id","text"],
       ["id","text"],
-    }]
+    ]}
   */
  templates:[
    "こんにちは",
