@@ -1,6 +1,8 @@
+import axios from 'axios'
+// require('dotenv').config();
+import { getapi } from "../api.js"
 
 const namespaced = true
-
 const state = {
   messages: {},
   /*
@@ -9,12 +11,6 @@ const state = {
       ["id","text"],
     ]}
   */
- templates:[
-   "こんにちは",
-   "いいですね",
-   "ありがとうございます",
-   "さようなら"
- ]
 }
 
 const mutations = {
@@ -28,6 +24,17 @@ const mutations = {
 const actions = {
   arrangeMessages: function({commit}, {id,message}){
     commit("setMessages",{id: id , message: message}) ;
+  },
+  arrangeApiMessages: function(id,message){
+    console.log(getapi());
+    let params = new FormData();
+    params.append('apikey', getapi());
+    params.append('query', message.message);
+    
+    const rtn = axios.post(`https://api.a3rt.recruit.co.jp/talk/v1/smalltalk`,params)
+    .then(jsondata => JSON.stringify(jsondata.data.results[0].reply));
+    
+    return rtn;
   }
 }
 

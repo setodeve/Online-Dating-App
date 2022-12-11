@@ -24,6 +24,8 @@
 </template>
 
 <script>
+
+
 export default {
   name: 'ChatRoomView',
   data() {
@@ -32,7 +34,7 @@ export default {
       /*
         ["id","text"],["id","text"],
       */
-     input:''
+     input:""
     }
   },
   mounted(){
@@ -46,7 +48,7 @@ export default {
     else this.message = tmp ;
   },
   methods:{
-    saveMessage: function(){
+    saveMessage: async function(){
       this.message.push(
         {
           id:1,
@@ -55,18 +57,22 @@ export default {
           time:this.$store.getters['messages/getPresentTime']
         }
       );
-      this.message.push(this.returnMessage()) ;
-      this.input = '' ;
+      
+      const replyMessage = await this.$store.dispatch("messages/arrangeApiMessages",{id:1,message: this.input});
+      console.log("1"+this.input);
+      const data =  this.returnMessage(replyMessage) ;
+      this.message.push(data) ;
       this.$store.dispatch("messages/arrangeMessages",{id: this.$route.params.id, message: this.message});
+      this.input = '' ;
     },
-    returnMessage: function(){
-      let num = Math.floor(Math.random() * 4);
-      let tmp = this.$store.getters['users/getUserById'](this.$route.params.id) ;
+    returnMessage: function(replyMessage){
+      const userImage = this.$store.getters['users/getUserById'](this.$route.params.id) ;
+      
       return {
         id: this.$route.params.id,
-        text: this.$store.state.messages.templates[num],
-        image: tmp[0].value.picture.thumbnail,
-        time:this.$store.getters['messages/getPresentTime']
+        text: replyMessage.replace(/^"(.*)"$/, '$1'),
+        image: userImage[0].value.picture.thumbnail,
+        time: this.$store.getters['messages/getPresentTime']
       }
     }
   }
