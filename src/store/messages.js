@@ -1,16 +1,9 @@
 import axios from 'axios'
-// require('dotenv').config();
 import { getapi } from "../api.js"
 
 const namespaced = true
 const state = {
   messages: {},
-  /*
-    {id:[
-      ["id","text"],
-      ["id","text"],
-    ]}
-  */
 }
 
 const mutations = {
