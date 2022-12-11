@@ -19,7 +19,7 @@ const actions = {
     commit("setMessages",{id: id , message: message}) ;
   },
   arrangeApiMessages: function(id,message){
-    console.log(getapi());
+
     let params = new FormData();
     params.append('apikey', getapi());
     params.append('query', message.message);
