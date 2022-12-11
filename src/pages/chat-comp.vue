@@ -59,8 +59,8 @@ export default {
       );
       
       const replyMessage = await this.$store.dispatch("messages/arrangeApiMessages",{id:1,message: this.input});
-      console.log("1"+this.input);
       const data =  this.returnMessage(replyMessage) ;
+
       this.message.push(data) ;
       this.$store.dispatch("messages/arrangeMessages",{id: this.$route.params.id, message: this.message});
       this.input = '' ;
